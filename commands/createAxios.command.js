@@ -6,6 +6,7 @@ const importAtTop = require("configure-react/utils/importAtTop");
 const checkIfRoot = require("configure-react/utils/checkIfRoot");
 const detail = require("configure-react/commands/details.json");
 const makeCodePritter = require("configure-react/utils/makeCodePritter");
+const createDotEnv = require("configure-react/utils/createDotEnv");
 const createAxios = (args) => {
   if (checkIfRoot(args)) {
     return console.log(
@@ -22,12 +23,7 @@ const startCreatingAxios = (currentPath) => {
   // create file if not exist
   const env = path.join(currentPath, "./.env");
   if (!fs.existsSync(env)) {
-    shell.touch(env);
-    // edit .env
-    const envData = detail.envData.join("\n");
-    fs.writeFileSync(env, makeCodePritter(envData), "utf8", (err) => {
-      if (err) throw err;
-    });
+    createDotEnv(currentPath);
   }
 
   shell.touch(path.join(currentPath, "./src/api/index.js"));
