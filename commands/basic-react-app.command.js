@@ -1,6 +1,6 @@
 const shell = require("shelljs");
 const path = require("path");
-const details = require("./details.json");
+const details = require("configure-react/commands/details.json");
 const fs = require("fs");
 // console.log(details.reactApp.appJsData.join("\n"))
 
@@ -72,7 +72,7 @@ const configureForTailwind = () => {
 };
 
 const createTailwindReactApp = (name) => {
-  const projectExist = require("./projectExist");
+  const projectExist = require("configure-react/commands/projectExist");
   if (projectExist(name) == true) {
     shell.exit();
   }

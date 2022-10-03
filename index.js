@@ -9,6 +9,24 @@ const program = new Command();
 
 const welcome = require("./commands/welcome");
 
+//======================================================= Trial 1 =======================================================
+// take multiple arguments as commands and pass them to the action function
+
+// get multple arguments as commands and pass them to the action functions as an array
+
+program
+  .command("inner")
+  .argument("<string>", "project name to delete")
+  .addCommand(
+    new Command("inner2")
+      .argument("<string>", "project name to delete")
+      .action(function () {
+        console.log("inner2");
+      })
+  );
+
+// ====================== 1st approach ======================
+
 program
   .command("delete")
   .argument("<string>", "project name to delete")
@@ -70,8 +88,68 @@ program
   .description(` Create Redux Folder`)
   .action(function () {
     if (this.args.length !== 0) {
-      const createRedux = require("configure-tailwind/commands/redux.command.js");
+      const createRedux = require("./commands/redux.command.js");
       createRedux(this.args);
+    }
+  });
+
+// Configure Chakra UI
+program
+  .command("chakra-ui")
+  .argument("<string>", "project name to create Chakra UI")
+  .description(` Create Chakra UI`)
+  .action(function () {
+    if (this.args.length !== 0) {
+      const createChakraUi = require("./commands/chakraUi.command.js");
+      createChakraUi(this.args);
+    }
+  });
+
+// Configure Context API
+program
+  .command("context-api")
+  .argument("<string>", "project name to create Context API")
+  .description(` Create Context API`)
+  .action(function () {
+    if (this.args.length !== 0) {
+      const createContextApi = require("./commands/createContextApi.command.js");
+      createContextApi(this.args);
+    }
+  });
+
+// Create Browser Router and Routes Folder
+program
+  .command("browser-router")
+  .argument("<string>", "project name to create Browser Router")
+  .description(` Create Browser Router`)
+  .action(function () {
+    if (this.args.length !== 0) {
+      const createRoutes = require("./commands/createRoutes.command.js");
+      createRoutes(this.args);
+    }
+  });
+
+// Congigure Axios
+program
+  .command("axios")
+  .argument("<string>", "project name to create Axios")
+  .description(` Create Axios`)
+  .action(function () {
+    if (this.args.length !== 0) {
+      const createAxios = require("./commands/createAxios.command.js");
+      createAxios(this.args);
+    }
+  });
+
+// Configure Utils Folder
+program
+  .command("utils")
+  .argument("<string>", "project name to create Utils Folder")
+  .description(` Create Utils Folder`)
+  .action(function () {
+    if (this.args.length !== 0) {
+      const createUtils = require("./commands/createUtils.command.js");
+      createUtils(this.args);
     }
   });
 
