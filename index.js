@@ -9,6 +9,8 @@ const program = new Command();
 
 const welcome = require("./commands/welcome");
 
+// show this welcome at the end of the command run
+
 //======================================================= Trial 1 =======================================================
 // take multiple arguments as commands and pass them to the action function
 
@@ -152,5 +154,43 @@ program
       createUtils(this.args);
     }
   });
+
+// Configure Redux Thunk
+program
+  .command("redux-thunk")
+  .argument("<string>", "project name to create Redux Thunk")
+  .description(` Create Redux Thunk`)
+  .action(function () {
+    if (this.args.length !== 0) {
+      const createReduxThunk = require("./commands/createReduxThunk.command.js");
+      createReduxThunk(this.args);
+    }
+  });
+
+// Configure Redux Saga
+program
+  .command("redux-saga")
+  .argument("<string>", "project name to create Redux Saga")
+  .description(` Create Redux Saga`)
+  .action(function () {
+    if (this.args.length !== 0) {
+      const createReduxSaga = require("./commands/createReduxSaga.command.js");
+      createReduxSaga(this.args);
+    }
+  });
+
+// Configure Redux Persist
+program
+  .command("redux-persist")
+  .argument("<string>", "project name to create Redux Persist")
+  .description(` Create Redux Persist`)
+  .action(function () {
+    if (this.args.length !== 0) {
+      const createReduxPersist = require("./commands/createReduxPersist.command.js");
+      createReduxPersist(this.args);
+    }
+  });
+
+const welcomee = require("./commands/welcome");
 
 program.parse();
