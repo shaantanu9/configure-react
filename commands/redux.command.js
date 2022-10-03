@@ -2,6 +2,76 @@ const path = require("path"); // path is use to join the path
 const fs = require("fs"); // fs is use to create file and folder
 const shell = require("shelljs"); // shelljs is use to run command in terminal
 const codeSnippets = require("configure-react/commands/details.json");
+const makeCodePritter = require("configure-react/utils/makeCodePritter");
+
+// ======================= Editing All index files =======================   //
+// Edit all index files
+const editIndexFiles = () => {
+  // Edit all index files
+  const currentPath = process.cwd(); // get the current path
+  const indexFilePath = path.join(currentPath, "src/redux/store/index.js"); // get the index file path
+
+  const actionsTypesIndexFilePath = path.join(
+    currentPath,
+    "src/redux/actions/types/index.js"
+  ); // get the actions types index file path
+  const actionsCreatorsIndexFilePath = path.join(
+    currentPath,
+    "src/redux/actions/creators/index.js"
+  ); // get the actions creators index file path
+  const reducersIndexFilePath = path.join(
+    currentPath,
+    "src/redux/reducers/index.js"
+  ); // get the reducers index file path
+
+  // Edit index.js
+  const storeIndex = codeSnippets.storeIndex.join("\n"); // get the store index code
+  fs.writeFileSync(
+    indexFilePath,
+    makeCodePritter(storeIndex),
+    "utf8",
+    (err) => {
+      // write the store index code in index.js file
+      if (err) throw err;
+    }
+  );
+
+  // Edit actions types index.js
+  const actionsTypesIndex = codeSnippets.actionsTypesIndex.join("\n"); // get the actions types index code
+  fs.writeFileSync(
+    actionsTypesIndexFilePath,
+    makeCodePritter(actionsTypesIndex),
+    "utf8",
+    (err) => {
+      // write the actions types index code in actions types index.js file
+      if (err) throw err;
+    }
+  );
+
+  // Edit actions creators index.js
+  const actionsCreatorsIndex = codeSnippets.actionsCreatorsIndex.join("\n"); // get the actions creators index code
+  fs.writeFileSync(
+    actionsCreatorsIndexFilePath,
+    makeCodePritter(actionsCreatorsIndex),
+    "utf8",
+    (err) => {
+      // write the actions creators index code in actions creators index.js file
+      if (err) throw err;
+    }
+  );
+
+  // Edit reducers index.js
+  const reduxReducersIndex = codeSnippets.reduxReducersIndex.join("\n"); // get the reducers index code
+  fs.writeFileSync(
+    reducersIndexFilePath,
+    makeCodePritter(reduxReducersIndex),
+    "utf8",
+    (err) => {
+      // write the reducers index code in reducers index.js file
+      if (err) throw err;
+    }
+  );
+};
 
 // ======================= Install Redux Packages =======================   //
 // install redux and react-redux package using npm if not installed
@@ -24,6 +94,7 @@ const createReduxFolder = () => {
     path.join(currentPath, "src/redux"),
     path.join(currentPath, "src/redux/actions"),
     path.join(currentPath, "src/redux/actions/types"),
+    path.join(currentPath, "src/redux/actions/creators"),
     path.join(currentPath, "src/redux/reducers"),
     path.join(currentPath, "src/redux/store")
   );
@@ -35,11 +106,12 @@ const createReduxFiles = () => {
   // Create Redux Files like actions, reducers, store
   const currentPath = process.cwd(); // get the current path
   createFiles(
-    path.join(currentPath, "src/redux/actions/index.js"),
     path.join(currentPath, "src/redux/actions/types/index.js"),
+    path.join(currentPath, "src/redux/actions/creators/index.js"),
     path.join(currentPath, "src/redux/reducers/index.js"),
     path.join(currentPath, "src/redux/store/index.js")
   );
+  editIndexFiles();
 };
 
 // ======================= CreateRedux =======================   //

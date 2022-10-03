@@ -7,8 +7,10 @@ const checkIfRoot = require("configure-react/utils/checkIfRoot");
 const detail = require("configure-react/commands/details.json");
 const makeCodePritter = require("configure-react/utils/makeCodePritter");
 const createDotEnv = require("configure-react/utils/createDotEnv");
+const createComponent = require("configure-react/utils/createComponent");
+
 const createAxios = (args) => {
-  if (checkIfRoot(args)) {
+  if (!checkIfRoot(args)) {
     return console.log(
       "You are not in the root of a react app. Please run this command in the root of a react app."
     );
@@ -19,12 +21,14 @@ const createAxios = (args) => {
 
 const startCreatingAxios = (currentPath) => {
   shell.exec("npm i axios");
-  shell.mkdir("-p", path.join(currentPath, "./src/api"));
+  shell.mkdir("-p", path.join(currentPath, "./src/api")); // -p flag creates parent directories if they don't exist
   // create file if not exist
   const env = path.join(currentPath, "./.env");
-  if (!fs.existsSync(env)) {
-    createDotEnv(currentPath);
-  }
+  const componentPath = path.join(currentPath, "./src/components");
+  // if (!fs.existsSync(env)) {
+  createDotEnv(env);
+  createComponent(componentPath);
+  // }
 
   shell.touch(path.join(currentPath, "./src/api/index.js"));
   shell.touch(path.join(currentPath, "./src/api/login.js"));

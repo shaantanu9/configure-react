@@ -138,12 +138,37 @@
     "  )",
     "}"
   ],
-  "reduxStore": [
+  "storeIndex": [
     "import {createStore} from 'redux'",
-    "const store = createStore(reducer)",
+    "import rootReducer from '../reducers'",
+    "import thunk from 'redux-thunk'",
+    "import {applyMiddleware, compose} from 'redux'",
+    "",
+    "const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;",
+    "const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));",
     "export default store"
   ],
-  "reduxReducer": [],
+  "actionsTypesIndex": ["export const ADD_TODO = 'ADD_TODO'"],
+  "actionsCreatorsIndex": [
+    "import {ADD_TODO} from '../types'",
+    "",
+    "export const addTodo = (todo) => {",
+    "  return {",
+    "    type: ADD_TODO,",
+    "    payload: todo,",
+    "  }",
+    "}"
+  ],
+
+  "reduxReducersIndex": [
+    "import { combineReducers } from 'redux'",
+    "",
+    "const rootReducer = combineReducers({",
+    "  //reducer",
+    "})",
+    "",
+    "export default rootReducer"
+  ],
   "contextApiData": [
     "import React, { createContext, useContext, useReducer } from 'react'",
     "",
@@ -282,7 +307,7 @@
     "import register from './register';",
     "import getData from './getData';",
     "",
-    "export default {",
+    "export {",
     "  login,",
     "register,",
     "getData",
