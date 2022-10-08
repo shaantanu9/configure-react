@@ -148,14 +148,14 @@
     "const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));",
     "export default store"
   ],
-  "actionsTypesIndex": ["export const ADD_TODO = 'ADD_TODO'"],
+  "actionsTypesIndex": ["export const INCREMENT = 'INCREMENT'"],
   "actionsCreatorsIndex": [
-    "import {ADD_TODO} from '../types'",
+    "import {INCREMENT} from '../types'",
     "",
-    "export const addTodo = (todo) => {",
+    "export const addCounter = (increamentCount) => {",
     "  return {",
-    "    type: ADD_TODO,",
-    "    payload: todo,",
+    "    type: INCREMENT,",
+    "    payload: 1,",
     "  }",
     "}"
   ],
