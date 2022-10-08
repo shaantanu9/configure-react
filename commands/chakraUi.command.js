@@ -1,5 +1,5 @@
-const ifNotDot = require("configure-react/utils/ifNotDot");
-const wrapTagAround = require("configure-react/utils/wrapTagAround");
+const { wrapTagAround, ifNotDot } = require("configure-react/utils");
+
 const shell = require("shelljs");
 const path = require("path");
 const fs = require("fs");

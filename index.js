@@ -191,4 +191,16 @@ program
     }
   });
 
+// refresh the files
+program
+  .command("refresh")
+  .argument("<string>", "project name to refresh")
+  .description(` Refresh the files`)
+  .action(function () {
+    if (this.args.length !== 0) {
+      const refreshFiles = require("./commands/refresh.command.js");
+      refreshFiles(this.args);
+    }
+  });
+
 program.parse();

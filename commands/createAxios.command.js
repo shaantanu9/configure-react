@@ -3,11 +3,17 @@ const path = require("path");
 const fs = require("fs");
 const wrapTagAround = require("configure-react/utils/wrapTagAround");
 const importAtTop = require("configure-react/utils/importAtTop");
-const checkIfRoot = require("configure-react/utils/checkIfRoot");
+
 const detail = require("configure-react/commands/details.json");
-const makeCodePritter = require("configure-react/utils/makeCodePritter");
-const createDotEnv = require("configure-react/utils/createDotEnv");
-const createComponent = require("configure-react/utils/createComponent");
+
+const {
+  editReadme,
+  createDotEnv,
+  createComponent,
+  checkIfRoot,
+  makeCodePritter,
+  endingScreen,
+} = require("configure-react/utils");
 
 const createAxios = (args) => {
   if (!checkIfRoot(args)) {
@@ -17,10 +23,14 @@ const createAxios = (args) => {
   }
   const currentPath = process.cwd();
   startCreatingAxios(currentPath);
+  endingScreen();
 };
 
 const startCreatingAxios = (currentPath) => {
   shell.exec("npm i axios");
+
+  const readmePath = path.join(currentPath, "./README.md");
+  editReadme(readmePath, "axios");
   shell.mkdir("-p", path.join(currentPath, "./src/api")); // -p flag creates parent directories if they don't exist
   // create file if not exist
   const env = path.join(currentPath, "./.env");

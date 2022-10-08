@@ -2,12 +2,16 @@ const shell = require("shelljs");
 const path = require("path");
 const details = require("./details.json");
 const fs = require("fs");
+const { editReadme, endingScreen } = require("../utils");
 // console.log(details.reactApp.appJsData.join("\n"))
 
 const editAppJs = () => {
-  appJsData = details.reactApp.appJsFileCode.join("\n");
+  appJsData = details.reactApp.tailwindAppJsFileCode.join("\n");
 
   shell.exec("rm -rf " + path.join(shell.pwd() + "/src/App.css"));
+  readMePath = path.join(shell.pwd() + "/README.md");
+
+  editReadme(readMePath, "Tailwind React App");
   fs.writeFileSync(
     path.join(shell.pwd() + "/src/App.js"),
     appJsData,
@@ -49,6 +53,7 @@ const createTailwindReactApp = (name) => {
   if (name[0] === ".") {
     try {
       configureForTailwind();
+      endingScreen();
     } catch (err) {
       console.log(err.message);
       shell.exit();

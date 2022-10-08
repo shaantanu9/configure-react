@@ -6,6 +6,14 @@ const importAtTop = require("configure-react/utils/importAtTop");
 const checkIfRoot = require("configure-react/utils/checkIfRoot");
 const detail = require("configure-react/commands/details.json");
 const makeCodePritter = require("configure-react/utils/makeCodePritter");
+
+const {
+  makeCodePritter,
+  checkIfRoot,
+  endingScreen,
+  editReadme,
+} = require("configure-react/utils");
+
 const startCreatingUtils = (currentPath) => {
   shell.mkdir("-p", path.join(currentPath, "./src/utils"));
   shell.touch(path.join(currentPath, "./src/utils/index.js"));
@@ -40,6 +48,7 @@ const startCreatingUtils = (currentPath) => {
   );
   return;
 };
+
 const createUtils = (args) => {
   if (checkIfRoot(args)) {
     return console.log(
@@ -48,6 +57,8 @@ const createUtils = (args) => {
   }
   const currentPath = process.cwd();
   startCreatingUtils(currentPath);
+  editReadme(currentPath, "utils");
+  endingScreen();
 };
 
 module.exports = createUtils;

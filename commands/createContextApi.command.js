@@ -1,7 +1,9 @@
-const ifNotDot = require("configure-react/util/ifNotDot");
-const makeCodePritter = require("configure-react/utils/makeCodePritter");
-const wrapTagAround = require("configure-react/utils/wrapTagAround");
-const sameFileExist = require("configure-react/util/sameFileExist");
+const {
+  ifNotDot,
+  sameFileExists,
+  wrapTagAround,
+  makeCodePritter,
+} = require("configure-react/utils");
 const shell = require("shelljs");
 const path = require("path");
 const fs = require("fs");
@@ -37,7 +39,7 @@ const createContextApi = async ([projectName]) => {
     );
   const currentPath = process.cwd();
   // if at current path package.json file exist
-  if (sameFileExist("package.json")) {
+  if (sameFileExists("package.json")) {
     // read package.json file
     const packageJson = require(path.join(currentPath, "./package.json"));
     // if package.json file has dependencies

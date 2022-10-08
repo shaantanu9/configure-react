@@ -1,9 +1,14 @@
 const path = require("path");
 const fs = require("fs");
 const shell = require("shelljs");
-const sameFileExist = require("configure-react/utils/sameFileExist");
-const makeCodePritter = require("configure-react/utils/makeCodePritter");
-const wrapTagAround = require("configure-react/utils/wrapTagAround");
+const {
+  wrapTagAround,
+  makeCodePritter,
+  sameFileExists,
+  editReadme,
+  endingScreen,
+} = require("configure-react/utils");
+
 const detail = require("./details.json");
 
 const createRoutes = (args) => {
@@ -16,7 +21,7 @@ const createRoutes = (args) => {
 
   //   import RoutesLink in App.js
   const appJsPath = path.join(currentPath, "./src/App.js");
-  if (!sameFileExist(appJsPath)) {
+  if (!sameFileExists(appJsPath)) {
     const appJsData = fs.readFileSync(appJsPath, "utf8");
     const appJsDataArray = appJsData.split("\n");
     const importRoutesLinkIndex = appJsDataArray.findIndex((line) =>
@@ -63,5 +68,7 @@ const createRoutes = (args) => {
     "{BrowserRouter}",
     "react-router-dom"
   );
+  editReadme(currentPath, "routes");
+  endingScreen("routes");
 };
 module.exports = createRoutes;

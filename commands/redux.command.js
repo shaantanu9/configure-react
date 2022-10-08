@@ -2,7 +2,7 @@ const path = require("path"); // path is use to join the path
 const fs = require("fs"); // fs is use to create file and folder
 const shell = require("shelljs"); // shelljs is use to run command in terminal
 const codeSnippets = require("configure-react/commands/details.json");
-const makeCodePritter = require("configure-react/utils/makeCodePritter");
+const { endingScreen, makeCodePritter } = require("configure-react/utils");
 
 // ======================= Editing All index files =======================   //
 // Edit all index files
@@ -121,6 +121,7 @@ const createRedux = () => {
   installRedux(); // install redux and react-redux
   //   createReduxContextApi(); // create context api
   addProvider(); // add provider in index.js file
+  endingScreen();
 };
 
 // ======================= Export =======================   //
