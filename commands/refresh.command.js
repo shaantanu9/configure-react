@@ -3,7 +3,61 @@ const fs = require("fs");
 const refreshApp = () => {};
 
 const refreshComponents = () => {
-    
+  console.log("refreshComponents function called");
+  let components = fs.readdirSync("./src/components");
+
+  components = components.map((component) => {
+    if (component !== "App.js") {
+      component = component.replace(".js", "");
+      component = component.replace(".jsx", "");
+      component = component.replace(".ts", "");
+      component = component.replace(".tsx", "");
+    }
+    return component;
+  });
+
+  console.log(components, "components Filtered");
+  const componentListNotPresent = [];
+  const alreadyImported = [];
+  console.log(components, "components");
+  !components.includes("index") &&
+    fs.writeFileSync("./src/components/index.js", "");
+  const readContent = fs.readFileSync("./src/components/index.js", "utf8");
+  const content = readContent.split("\n");
+  const present = content.includes("export { ");
+  const lastIndexOfImport = content.lastIndexOf("import ");
+
+  content.map((line) => {
+    if (line.includes("import ")) {
+      line = line.replace("import ", "");
+      const component = line.split(" from ")[0];
+      console.log(component, "component Present");
+      alreadyImported.push(component);
+    }
+  });
+
+  components.map((component) => {
+    if (component !== "index.js") {
+      const componentPresent = alreadyImported.includes(component);
+      if (!componentPresent) {
+        const lastIndexOfImportLine = content.lastIndexOf("import ");
+        console.log(lastIndexOfImportLine, "lastIndexOfImportLine");
+        const line = `import ${component} from "./${component}";`;
+        content.splice(lastIndexOfImportLine + 1, 0, line);
+      }
+    }
+  });
+
+  fs.writeFileSync(
+    "./src/components/index.js",
+    content.join("\n"),
+    (err, data) => {}
+  );
+
+  if (present) {
+    const index = content.indexOf("export { ");
+    content.splice(index, 1);
+  }
 };
 
 const refreshPages = () => {};
