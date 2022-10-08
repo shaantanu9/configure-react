@@ -39,12 +39,12 @@ program
 // create the tailwind Configure ReactJs App
 
 program
-  .command("react-app")
+  .command("tailwind")
   .argument("<string>", "project name to delete")
   .description(` Create Tailwind Configure ReactJs App`)
   .action(function () {
     if (this.args.length !== 0) {
-      const createTailwindReactApp = require("./commands/react-app.command");
+      const createTailwindReactApp = require("./commands/tailwind.command");
       createTailwindReactApp(this.args);
     } else {
       console.log("Please Provide the Project Name");
@@ -190,7 +190,5 @@ program
       createReduxPersist(this.args);
     }
   });
-
-const welcomee = require("./commands/welcome");
 
 program.parse();

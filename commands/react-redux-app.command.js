@@ -51,11 +51,6 @@ const editAppJs = () => {
     appJsData,
     (err, data) => {}
   );
-  installreactRouter();
-
-  createRouterFolder();
-
-  shell.exec("npm run start");
 };
 
 const runBuild = () => {
