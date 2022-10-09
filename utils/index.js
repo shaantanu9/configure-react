@@ -7,8 +7,8 @@ const wrapTagAround = require("./wrapTagAround");
 const createDotEnv = require("./createDotEnv");
 const endingScreen = require("./endingScreen");
 const ifNotDot = require("./ifNotDot");
-// const createFolder = require("./createFolder");
-// const createFile = require("./createFile");
+const createFolder = require("./createFolder");
+const createFile = require("configure-react/utils/createFile.js");
 const sameFileExists = require("./sameFileExists");
 module.exports = {
   editReadme,
@@ -20,7 +20,7 @@ module.exports = {
   createDotEnv,
   endingScreen,
   ifNotDot,
-  // createFolder,
-  // createFile,
+  createFolder,
+  createFile,
   sameFileExists,
 };

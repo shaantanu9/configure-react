@@ -203,4 +203,28 @@ program
     }
   });
 
+// Create BigReact Project that contains list of small react projects
+program
+  .command("create-cluster")
+  .argument("<string>", "project name to create Big React Project")
+  .description(` Create Big React Project`)
+  .action(function () {
+    if (this.args.length !== 0) {
+      const creaeteCluster = require("configure-react/commands/createReactCluster.command");
+      creaeteCluster(this.args);
+    }
+  });
+
+// Create Cluster App == small React Project
+program
+  .command("create-cluster-app")
+  .argument("<string>", "project name to create Cluster App")
+  .description(` Create Cluster App`)
+  .action(function () {
+    if (this.args.length !== 0) {
+      const createClusterApp = require("configure-react/commands/createClusterApp.command");
+      createClusterApp(this.args);
+    }
+  });
+
 program.parse();

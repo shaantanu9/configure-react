@@ -24,7 +24,6 @@ const refreshComponents = () => {
     fs.writeFileSync("./src/components/index.js", "");
   const readContent = fs.readFileSync("./src/components/index.js", "utf8");
   const content = readContent.split("\n");
-  const present = content.includes("export { ");
   const lastIndexOfImport = content.lastIndexOf("import ");
 
   content.map((line) => {
@@ -39,11 +38,22 @@ const refreshComponents = () => {
   components.map((component) => {
     if (component !== "index.js") {
       const componentPresent = alreadyImported.includes(component);
-      if (!componentPresent) {
+
+      if (!componentPresent && component !== "index") {
         const lastIndexOfImportLine = content.lastIndexOf("import ");
+        const present = content.includes("export");
+
+        console.log(present, "present");
+
+        const lastIndexOfExportLine = content.lastIndexOf("export { ");
         console.log(lastIndexOfImportLine, "lastIndexOfImportLine");
-        const line = `import ${component} from "./${component}";`;
-        content.splice(lastIndexOfImportLine + 1, 0, line);
+        const line2Import = `import ${component} from "./${component}";`;
+        const line2Export = `${component}`;
+        content.splice(lastIndexOfImportLine + 1, 0, line2Import);
+        present && content.splice(lastIndexOfExportLine + 1, 0, line2Export);
+        !present &&
+          content.splice(content.length, 0, `export{ ${line2Export} \n }`);
+        console.log(content, "content");
       }
     }
   });
@@ -53,11 +63,6 @@ const refreshComponents = () => {
     content.join("\n"),
     (err, data) => {}
   );
-
-  if (present) {
-    const index = content.indexOf("export { ");
-    content.splice(index, 1);
-  }
 };
 
 const refreshPages = () => {};
