@@ -23,10 +23,12 @@
   "files": [
     "commands/*",
     "index.js",
-    "utils/*"
+    "utils/*",
+    "fileData/*"
   ],
   "bin": {
-    "configure-react": "index.js"
+    "configure-react": "index.js",
+    "cr": "index.js"
   },
   "license": "MIT",
   "dependencies": {

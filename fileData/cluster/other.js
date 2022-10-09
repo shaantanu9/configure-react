@@ -27,6 +27,7 @@ yarn-error.log*
 
 const packageJson = (name) => `{
     "name": "${name}",
+    "clusterapp": true,
     "version": "0.1.0",
     "private": true,
     "dependencies": {

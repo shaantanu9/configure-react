@@ -35,8 +35,8 @@ const createBigReact = (args) => {
   const currentPath = process.cwd();
 
   startCreatingBigReact(currentPath);
-  //   editReadme(currentPath, "big-react");
-  //   endingScreen();
+  editReadme(currentPath, "big-react");
+  endingScreen();
 };
 
 module.exports = createBigReact;

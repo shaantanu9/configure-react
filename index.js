@@ -217,13 +217,25 @@ program
 
 // Create Cluster App == small React Project
 program
-  .command("create-cluster-app")
+  .command("cluster-app")
   .argument("<string>", "project name to create Cluster App")
   .description(` Create Cluster App`)
   .action(function () {
     if (this.args.length !== 0) {
       const createClusterApp = require("configure-react/commands/createClusterApp.command");
       createClusterApp(this.args);
+    }
+  });
+
+// install package in cluster app
+program
+  .command("ica")
+  .argument("<string>", "project name to install package in Cluster App")
+  .description(` Install package in Cluster App`)
+  .action(function () {
+    if (this.args.length !== 0) {
+      const installClusterApp = require("configure-react/commands/installClusterApp.command");
+      installClusterApp(this.args);
     }
   });
 
