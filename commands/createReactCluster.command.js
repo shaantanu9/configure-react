@@ -3,22 +3,19 @@ const fs = require("fs");
 const path = require("path");
 const shell = require("shelljs");
 
-const firstProject = (currentPath) => {
-  shell.mkdir("-p", path.join(currentPath, "./first-project"));
-  shell.cd(path.join(currentPath, "./first-project"));
-  shell.exec("npm init -y");
-};
-
-const startCreatingBigReact = (currentPath) => {
+const startCreatingBigReact = (currentPath, clusterName) => {
   shell.touch("package.json");
   fs.writeFileSync(
     path.join(currentPath, "./package.json"),
-    packageJsonData(),
+    packageJsonData(clusterName),
     "utf8",
     (err) => {}
   );
   shell.exec("npm install");
-  firstProject(currentPath);
+  // process.chdir(`./${clusterName}`);
+  shell.exec(`cd ${clusterName} 
+  npx configure-react cluster-app demo-cluster-app
+  `);
 };
 
 const createBigReact = (args) => {
@@ -34,16 +31,19 @@ const createBigReact = (args) => {
   shell.cd(args[0]);
   const currentPath = process.cwd();
 
-  startCreatingBigReact(currentPath);
-  editReadme(currentPath, "big-react");
+  startCreatingBigReact(currentPath, args[0]);
+  // editReadme(currentPath, "big-react");
   endingScreen();
+  console.log("\n\n");
+  console.log("\x1b[32m", "cd " + args[0] + "/demo-cluster-app");
+  console.log("\x1b[32m", "npm start");
 };
 
 module.exports = createBigReact;
 
-function packageJsonData() {
+function packageJsonData(clusterName) {
   return `  {
-            "name": "reactcluster",
+            "name": "cluster-${clusterName}",
             "version": "1.0.0",
             "description": "React Cluster by configure React  ",
             "dependencies": {

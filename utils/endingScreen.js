@@ -1,8 +1,8 @@
-const endingScreen = () => {
+const endingScreen = (name = "") => {
   console.log("\n", "\n");
   console.log("\n", "\n");
   console.log("\n", "\n");
-  console.log("\x1b[32m", "Axios configured successfully");
+  console.log("\x1b[32m", `${name} configured successfully`);
   console.log("\n");
   console.log("\x1b[32m", "By Configure React By Shantanu Bombatkar ");
   console.log("\n");

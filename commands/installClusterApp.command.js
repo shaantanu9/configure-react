@@ -3,40 +3,6 @@ const path = require("path");
 const shell = require("shelljs");
 const { editReadme, endingScreen } = require("configure-react/utils");
 
-const changePackageJson = (
-  currentPath,
-  clusterName,
-  args,
-  packageJsonPath,
-  packageJsonDataObject,
-  listOfPackages
-) => {
-  process.chdir("../");
-  console.log("Installing clusterapp");
-  console.log(process.cwd(), "from changePackageJson");
-  shell.exec("npm install " + listOfPackages);
-
-  //   read cluster from package.json
-  mainClusterPath = path.join(currentPath, "../", clusterName);
-  //   read clusterapp from package.json
-  const mainClusterPackageJson = fs.readFileSync(
-    path.join(mainClusterPath, "./package.json"),
-    "utf8"
-  );
-  const mainClusterPackageJsonDataObject = JSON.parse(mainClusterPackageJson);
-  args.forEach((arg) => {
-    packageJsonDataObject.dependencies[arg] =
-      mainClusterPackageJsonDataObject.dependencies[arg];
-  });
-  fs.writeFileSync(
-    packageJsonPath,
-    JSON.stringify(packageJsonDataObject, null, 2),
-    "utf8",
-    (err) => {}
-  );
-  console.log("Installed clusterapp successfully");
-};
-
 const installClusterApp = (args) => {
   const packageObject = {};
   const listOfPackages = args.join(" ");
@@ -55,8 +21,6 @@ const installClusterApp = (args) => {
 
   process.chdir("../");
 
-  shell.exec("npm install " + listOfPackages);
-
   //   read cluster from package.json
   mainClusterPath = path.join(process.cwd());
   //   read clusterapp from package.json
@@ -65,10 +29,24 @@ const installClusterApp = (args) => {
     "utf8"
   );
   const mainClusterPackageJsonDataObject = JSON.parse(mainClusterPackageJson);
+
   args.forEach((arg) => {
+    if (mainClusterPackageJsonDataObject.dependencies[arg] === undefined) {
+      shell.exec("npm install " + arg);
+    }
+  });
+
+  args.forEach((arg) => {
+    console.log("Installing " + arg);
+    const mainClusterPackageJson = fs.readFileSync(
+      path.join(mainClusterPath, "./package.json"),
+      "utf8"
+    );
+    const mainClusterPackageJsonDataObject = JSON.parse(mainClusterPackageJson);
     packageJsonDataObject.dependencies[arg] =
       mainClusterPackageJsonDataObject.dependencies[arg];
   });
+
   fs.writeFileSync(
     packageJsonPath,
     JSON.stringify(packageJsonDataObject, null, 2),

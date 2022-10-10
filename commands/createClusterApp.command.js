@@ -14,6 +14,7 @@ const {
   reportWebVitals,
   setupTests,
   logoSvg,
+  childComponent,
 } = require("../fileData/cluster/src");
 
 const createPublic = (clusterPublicPath) => {
@@ -39,11 +40,15 @@ const createSrc = (clusterAppSrcPath) => {
   );
   fs.writeFileSync(path.join(clusterAppSrcPath, "setupTests.js"), setupTests());
   fs.writeFileSync(path.join(clusterAppSrcPath, "logo.svg"), logoSvg());
+  fs.writeFileSync(
+    path.join(clusterAppSrcPath, "components", "ChildComponent.js"),
+    childComponent()
+  );
 };
 
 const otherFiles = (clusterAppPath, name) => {
   // createFile(path.join(clusterAppPath, ".gitignore"), gitIgnore);
-  console.log("gitignore", gitIgnore);
+
   fs.writeFileSync(path.join(clusterAppPath, ".gitignore"), gitIgnore());
   fs.writeFileSync(
     path.join(clusterAppPath, "package.json"),
@@ -69,6 +74,7 @@ const startCreating = (name) => {
 };
 const clusterApp = (name) => {
   name = name[0].toLowerCase();
+
   if (sameFileExists(name)) {
     console.log("Folder already exists");
     return;
@@ -96,7 +102,7 @@ const clusterApp = (name) => {
     );
     return;
   }
-  console.log(packageJson.name, "package.name");
+  // console.log(packageJson.name, "package.name");
   if (!pacakageAuthor) {
     console.log("Please add author in package.json file");
     return;

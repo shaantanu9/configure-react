@@ -229,7 +229,7 @@ program
 
 // install package in cluster app
 program
-  .command("ica")
+  .command("ic")
   .argument("<string>", "project name to install package in Cluster App")
   .description(` Install package in Cluster App`)
   .action(function () {
