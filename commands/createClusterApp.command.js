@@ -109,7 +109,8 @@ const clusterApp = (name) => {
   }
   startCreating(name);
   // editReadme(currentPath, "utils");
-  editReadme(currentPath, `Cluster App ${name} `);
+  const readmePath = path.join(currentPath, name, "README.md");
+  editReadme(readmePath, `Cluster App **${name}** `);
 
   endingScreen();
   console.log("\x1b[32m", "cd " + name);

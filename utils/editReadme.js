@@ -17,14 +17,17 @@ const editReadme = (readmePath, content) => {
         readmeContent.splice(index + 2, 0, line);
     } else {
       const line = `# Getting Started with configure-react
-          This project was bootstrapped with [configure-react](https://github.com/shaantanu9/configure-react).
-          ${content} is Created with [configure-react](https://github.com/shaantanu9/configure-react)
-          `;
+This project was bootstrapped with [configure-react](https://github.com/shaantanu9/configure-react).
+${content} is Created with [configure-react](https://github.com/shaantanu9/configure-react)
+`;
       readmeContent.splice(4, 0, line);
     }
 
     fs.writeFileSync(readmePath, readmeContent.join("\n"), (err, data) => {});
-  } catch (error) {}
+  } catch (error) {
+    console.log(readmePath, "readmePath");
+    // fs.writeFileSync(readmePath + "/" + content, content, (err, data) => {});
+  }
 };
 
 module.exports = editReadme;
