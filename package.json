@@ -1,6 +1,6 @@
 {
   "name": "configure-react",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Easily configure React App with Any Framework or Library like Bootstrap, Material UI, Tailwind CSS, etc. And also configure with any state management library like Redux, MobX, etc. and also configure with any routing library like React Router, Reach Router, etc. and also configure with any testing library like Jest, Enzyme, etc. and also configure with any form library like Formik, React Hook Form, etc. and also configure with any styling library like Styled Components, Emotion, etc. and also configure with any GraphQL library like Apollo Client, Relay, etc. and also configure with any i18n library like i18next, react-intl, etc. ",
   "main": "index.js",
   "scripts": {
