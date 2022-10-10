@@ -112,6 +112,8 @@ const clusterApp = (name) => {
   editReadme(currentPath, `Cluster App ${name} `);
 
   endingScreen();
+  console.log("\x1b[32m", "cd " + name);
+  console.log("\x1b[32m", "npm start");
 };
 
 module.exports = clusterApp;
